@@ -1,6 +1,6 @@
 /* ============================================================
    ROOH BEAUTY — FULL PRODUCT CATALOG
-   Foundation: 32 shades · 4 undertone families
+   Foundation: 28 shades · 4 undertone families
    Concealer:  18 shades (cover / hi-lite / contour) + 4 correctors
    Lip:        24 shades · 4 colour families
    ============================================================ */
@@ -19,7 +19,6 @@ const FOUNDATION_GROUPS = [
       { name: "Arctic Truffle", code: "C-05", depth: "med-deep", color: "#6B4F48" },
       { name: "Frosted Mahogany", code: "C-06", depth: "deep", color: "#59423B" },
       { name: "Midnight Espresso", code: "C-07", depth: "rich", color: "#46342F" },
-      { name: "Unbothered & Dark", code: "C-08", depth: "ultra deep", color: "#342623" },
     ],
   },
   {
@@ -34,7 +33,6 @@ const FOUNDATION_GROUPS = [
       { name: "Netflix & Glow", code: "W-05", depth: "med-deep", color: "#775A3C" },
       { name: "Espresso Slay", code: "W-06", depth: "deep", color: "#634B31" },
       { name: "Rich & Petty", code: "W-07", depth: "rich", color: "#4E3B27" },
-      { name: "Warm Chaos Energy", code: "W-08", depth: "ultra deep", color: "#3A2C1D" },
     ],
   },
   {
@@ -49,7 +47,6 @@ const FOUNDATION_GROUPS = [
       { name: "Plot Twist Tan", code: "N-05", depth: "med-deep", color: "#715542" },
       { name: "No Filter Needed", code: "N-06", depth: "deep", color: "#5E4636" },
       { name: "Literally Flawless", code: "N-07", depth: "rich", color: "#4A382B" },
-      { name: "Chronically Radiant", code: "N-08", depth: "ultra deep", color: "#372920" },
     ],
   },
   {
@@ -64,7 +61,6 @@ const FOUNDATION_GROUPS = [
       { name: "Plot Armor Bronze", code: "O-05", depth: "med-deep", color: "#755D3D" },
       { name: "Earthy & That Girl", code: "O-06", depth: "deep", color: "#614D33" },
       { name: "Rooted & Radiant", code: "O-07", depth: "rich", color: "#4D3D28" },
-      { name: "Deep Olive Energy", code: "O-08", depth: "ultra deep", color: "#392D1E" },
     ],
   },
 ];
@@ -187,7 +183,7 @@ const FOUNDATION_HERO = [
   FOUNDATION_GROUPS[1].shades[2], // Brunch Drip
   FOUNDATION_GROUPS[2].shades[3], // Hired
   FOUNDATION_GROUPS[1].shades[5], // Espresso Slay
-  FOUNDATION_GROUPS[0].shades[7], // Unbothered & Dark
+  FOUNDATION_GROUPS[0].shades[6], // Midnight Espresso
 ];
 const CONCEALER_HERO = [
   CONCEALER_GROUPS[0].shades[0],
@@ -226,7 +222,7 @@ const PRODUCTS = [
     coverage: "Medium · buildable",
     size: "30 ml / 1.0 fl oz",
     actives: ["Niacinamide 5%", "Ceramide NP", "Centella"],
-    shadeCount: "32 shades · 4 undertones",
+    shadeCount: "28 shades · 4 undertones",
     shadeNoun: "shade",
     shadeGroups: FOUNDATION_GROUPS,
     shades: FOUNDATION_HERO,
@@ -236,7 +232,7 @@ const PRODUCTS = [
       { title: "Fades post-acne marks", body: "Niacinamide 5% visibly evens tone and fades dark marks over 8–12 weeks of wear." },
       { title: "True 24-hour wear", body: "Transfer-resistant and humidity-proof — tested through long shifts, workouts, and ugly-crying." },
       { title: "Barrier-first formula", body: "Ceramide NP + centella keep skin calm and hydrated instead of stripped and tight." },
-      { title: "32 honest shades", body: "Cool, warm, neutral, and olive undertones from fair to ultra-rich — matched on real skin." },
+      { title: "28 honest shades", body: "Cool, warm, neutral, and olive undertones from fair to ultra-rich — matched on real skin." },
     ],
     actives_detail: [
       { name: "Niacinamide", pct: "5%", body: "Visibly fades hyperpigmentation, regulates oil, refines pores." },

@@ -56,7 +56,7 @@ function AboutPage({ setPage }) {
             </div>
             <div className="value-card" data-reveal style={{'--reveal-delay':'160ms'}}>
               <div className="num">03</div>
-              <h4>40 foundation shades</h4>
+              <h4>32 foundation shades</h4>
               <p>Plus 4 correctors. Built for hyperpigmentation, redness, and two-toned lips.</p>
             </div>
             <div className="value-card" data-reveal style={{'--reveal-delay':'240ms'}}>

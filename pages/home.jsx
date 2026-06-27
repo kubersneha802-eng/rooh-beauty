@@ -139,7 +139,7 @@ function HomePage({ setPage, cart }) {
             </h2>
           </div>
           <div className="product-teaser-grid">
-            <Teaser tone="" label="Foundation · 24hr wear" name="Skin-Forward Foundation" shadeCount="40 shades · sensitive skin" price="$26" shades={FOUNDATION_SHADES} onClick={() => setPage("product", "foundation")} delay="0ms" />
+            <Teaser tone="" label="Foundation · 24hr wear" name="Skin-Forward Foundation" shadeCount="32 shades · sensitive skin" price="$26" shades={FOUNDATION_SHADES} onClick={() => setPage("product", "foundation")} delay="0ms" />
             <Teaser tone="g2" label="Concealer + Corrector" name="Blur & Balance Concealer" shadeCount="22 shades + 4 correctors" price="$20" shades={CONCEALER_SHADES} onClick={() => setPage("product", "concealer")} delay="120ms" />
             <Teaser tone="g3" label="Lip · Treatment Gloss" name="Glow & Go Lip Treatment" shadeCount="24 shades · peptides" price="$18" shades={LIP_SHADES} onClick={() => setPage("product", "lip")} delay="240ms" />
           </div>

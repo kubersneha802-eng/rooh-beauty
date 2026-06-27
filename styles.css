@@ -1,15 +1,17 @@
 /* ====================== Rooh Beauty ====================== */
 :root {
-  --rose: #72243E;
-  --rose-soft: #ED93B1;
+  --rose: #8B1E3C;
+  --rose-soft: #E8849E;
   --rose-bg: #FCEEF3;
   --green: #0B4A32;
   --green-bg: #E8F0EA;
   --violet: #26215C;
   --violet-bg: #E7E5F0;
-  --amber: #BA7517;
-  --amber-bg: #F7ECDA;
-  --cream: #FAF8F5;
+  --amber: #C9A55A;
+  --amber-bg: #F7F0DC;
+  --terracotta: #C4622D;
+  --terracotta-bg: #F5E8DF;
+  --cream: #F9F6F0;
   --ink: #1A1410;
   --ink-2: #2A211C;
   --line: rgba(26, 20, 16, 0.12);
@@ -31,7 +33,7 @@ body {
 }
 
 h1, h2, h3, h4, .serif {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.05;
@@ -63,7 +65,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   max-width: 1480px; margin: 0 auto; padding: 0 40px;
 }
 .brand {
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
   color: var(--rose);
 }
@@ -78,7 +80,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   color: var(--ink); letter-spacing: 0.02em;
   transition: background .2s, color .2s;
 }
-.nav-link:hover { background: rgba(114,36,62,0.06); }
+.nav-link:hover { background: rgba(139,30,60,0.06); }
 .nav-link.active { background: var(--rose); color: var(--cream); }
 .bag-btn {
   position: relative; display: flex; align-items: center; gap: 10px;
@@ -132,7 +134,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .hero-inner { position: relative; z-index: 2; max-width: 880px; }
 .hero-brand {
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: clamp(40px, 6vw, 80px);
   letter-spacing: 0.18em;
   color: var(--rose);
@@ -155,14 +157,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .orb {
   position: absolute; border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.55;
+  filter: blur(80px);
+  opacity: 0.2;
   pointer-events: none;
   animation: float 14s ease-in-out infinite;
 }
-.orb.o1 { width: 520px; height: 520px; right: -120px; top: 60px; background: var(--rose-soft); }
-.orb.o2 { width: 380px; height: 380px; right: 200px; bottom: -100px; background: #F4C8D5; animation-delay: -4s; }
-.orb.o3 { width: 280px; height: 280px; right: 380px; top: 220px; background: #E8B8C7; animation-delay: -8s; opacity: 0.4; }
+.orb.o1 { width: 560px; height: 560px; right: -140px; top: 40px; background: var(--terracotta-bg); }
+.orb.o2 { width: 400px; height: 400px; right: 180px; bottom: -120px; background: #EFD0BA; animation-delay: -4s; }
+.orb.o3 { width: 300px; height: 300px; right: 360px; top: 200px; background: #F2E0CE; animation-delay: -8s; opacity: 0.13; }
 
 @keyframes float {
   0%, 100% { transform: translate(0,0) scale(1); }
@@ -185,15 +187,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   width: max-content;
 }
 .marquee-item {
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 28px; font-style: italic;
   white-space: nowrap;
   display: flex; align-items: center; gap: 64px;
 }
 .marquee-item::after {
-  content: "✦";
-  color: var(--rose-soft);
-  font-size: 18px; font-style: normal;
+  content: "◦";
+  color: var(--amber);
+  font-size: 22px; font-style: normal;
+  opacity: 0.7;
 }
 @keyframes scroll {
   0% { transform: translateX(0); }
@@ -207,7 +210,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .feature-card {
   background: white;
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 44px 36px;
   transition: transform .3s, box-shadow .3s;
 }
@@ -219,7 +222,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   width: 56px; height: 56px; border-radius: 50%;
   background: var(--rose-bg); color: var(--rose);
   display: flex; align-items: center; justify-content: center;
-  font-family: "Playfair Display", serif; font-size: 24px;
+  font-family: "Cormorant Garamond", serif; font-size: 24px;
   margin-bottom: 28px;
 }
 .feature-card h3 { font-size: 26px; margin-bottom: 14px; }
@@ -250,7 +253,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   font-size: 36px; margin: 12px 0 8px;
 }
 .teaser-shades {
-  font-style: italic; color: var(--rose); font-family: "Playfair Display", serif;
+  font-style: italic; color: var(--rose); font-family: "Cormorant Garamond", serif;
   font-size: 18px;
 }
 .teaser-card.g2 .teaser-shades { color: var(--violet); }
@@ -268,7 +271,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   margin-top: auto;
   display: flex; align-items: center; justify-content: space-between;
 }
-.teaser-price { font-family: "Playfair Display", serif; font-size: 28px; }
+.teaser-price { font-family: "Cormorant Garamond", serif; font-size: 28px; }
 .teaser-arrow {
   width: 48px; height: 48px; border-radius: 50%;
   background: var(--ink); color: var(--cream);
@@ -286,7 +289,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .manifesto .eyebrow { color: var(--rose-soft); }
 .manifesto blockquote {
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: clamp(40px, 5vw, 72px);
   font-style: italic; line-height: 1.1;
   max-width: 1000px; margin: 32px auto 36px;
@@ -329,7 +332,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
   padding: 28px;
-  border-radius: 4px;
+  border-radius: 10px;
   min-height: 160px;
   display: flex; flex-direction: column; justify-content: space-between;
 }
@@ -360,7 +363,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .footer-brand .tag {
   font-style: italic; color: var(--rose-soft); margin-bottom: 24px;
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
 }
 .footer-brand p { color: rgba(250,248,245,0.6); max-width: 320px; }
 .footer-col h5 {
@@ -428,9 +431,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   width: 56px; height: 56px; border-radius: 4px;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
 }
-.cart-name { font-family: "Playfair Display", serif; font-size: 17px; }
+.cart-name { font-family: "Cormorant Garamond", serif; font-size: 17px; }
 .cart-shade { font-style: italic; color: var(--rose); font-size: 13px; margin-top: 2px; }
-.cart-price { font-family: "Playfair Display", serif; font-size: 17px; }
+.cart-price { font-family: "Cormorant Garamond", serif; font-size: 17px; }
 .cart-remove {
   display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted); margin-top: 6px;
@@ -443,7 +446,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .cart-total {
   display: flex; justify-content: space-between;
   margin-bottom: 18px;
-  font-family: "Playfair Display", serif; font-size: 24px;
+  font-family: "Cormorant Garamond", serif; font-size: 24px;
 }
 .cart-ship {
   font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px;
@@ -465,7 +468,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   transition: background .2s, color .2s, border-color .2s;
 }
 .qty-stepper > button:not(.cart-remove):hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-.qty-stepper > span { font-family: "Playfair Display", serif; font-size: 16px; min-width: 16px; text-align: center; }
+.qty-stepper > span { font-family: "Cormorant Garamond", serif; font-size: 16px; min-width: 16px; text-align: center; }
 .qty-stepper .cart-remove { margin-top: 0; margin-left: 6px; }
 
 /* ===================== CHECKOUT ===================== */
@@ -492,7 +495,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .co-main { padding: 40px 44px 44px; display: flex; flex-direction: column; }
 .co-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-.co-brand { font-family: "Playfair Display", serif; font-size: 18px; font-weight: 600; letter-spacing: 0.08em; color: var(--rose); }
+.co-brand { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 600; letter-spacing: 0.08em; color: var(--rose); }
 .co-x {
   width: 34px; height: 34px; border-radius: 50%;
   border: 1px solid var(--line-strong);
@@ -527,14 +530,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   transition: border-color .2s, box-shadow .2s;
 }
 .co-input::placeholder { color: rgba(26,20,16,0.32); }
-.co-input:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px rgba(114,36,62,0.1); }
+.co-input:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px rgba(139,30,60,0.1); }
 .co-input.err { border-color: #C0392B; }
 .co-err { font-size: 12px; color: #C0392B; }
 
 .co-cardwrap { display: flex; align-items: center; gap: 10px; padding: 0 16px; }
 .co-bare { flex: 1; border: none; background: none; font: inherit; font-size: 15px; padding: 14px 0; color: var(--ink); }
 .co-bare:focus { outline: none; }
-.co-cardwrap:focus-within { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(114,36,62,0.1); }
+.co-cardwrap:focus-within { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(139,30,60,0.1); }
 .co-brand-badge {
   font-family: "DM Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
   padding: 4px 10px; border-radius: 999px; background: var(--ink); color: var(--cream);
@@ -598,9 +601,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .co-cline-name { flex: 1; }
 .co-cline-name em { font-style: italic; color: var(--rose); }
 .co-cline-qty { color: var(--muted); }
-.co-cline-price { font-family: "Playfair Display", serif; font-size: 16px; min-width: 48px; text-align: right; }
+.co-cline-price { font-family: "Cormorant Garamond", serif; font-size: 16px; min-width: 48px; text-align: right; }
 .co-cline.total {
-  font-family: "Playfair Display", serif; font-size: 20px;
+  font-family: "Cormorant Garamond", serif; font-size: 20px;
   justify-content: space-between; padding-top: 16px; margin-top: 4px;
   border-top: 1px solid var(--line); border-bottom: none;
 }
@@ -627,14 +630,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .co-sline-info { flex: 1; }
 .co-sline-name { font-size: 14px; }
-.co-sline-shade { font-family: "Playfair Display", serif; font-style: italic; font-size: 13px; color: var(--rose-soft); }
-.co-sline-price { font-family: "Playfair Display", serif; font-size: 16px; }
+.co-sline-shade { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 13px; color: var(--rose-soft); }
+.co-sline-price { font-family: "Cormorant Garamond", serif; font-size: 16px; }
 .co-summary-rows { padding: 24px 0; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.14); }
 .co-srow { display: flex; justify-content: space-between; font-size: 14px; color: rgba(250,248,245,0.78); }
 .co-grand {
   display: flex; justify-content: space-between; align-items: baseline;
   padding: 24px 0;
-  font-family: "Playfair Display", serif; font-size: 28px;
+  font-family: "Cormorant Garamond", serif; font-size: 28px;
 }
 .co-perk {
   margin-top: auto; font-size: 12px; color: rgba(250,248,245,0.6);
@@ -667,7 +670,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   width: 22px; height: 22px; border-radius: 50%;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
 }
-.toast em { color: var(--rose-soft); font-style: italic; font-family: "Playfair Display", serif; font-size: 15px; }
+.toast em { color: var(--rose-soft); font-style: italic; font-family: "Cormorant Garamond", serif; font-size: 15px; }
 
 /* ===================== SHOP ===================== */
 .shop-hero {
@@ -758,7 +761,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .product-card h3 { font-size: 28px; margin: 8px 0 6px; }
 .product-card .shade-name {
-  font-family: "Playfair Display", serif; font-style: italic;
+  font-family: "Cormorant Garamond", serif; font-style: italic;
   color: var(--rose); font-size: 18px;
 }
 .product-card .desc {
@@ -790,22 +793,22 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }
-.card-price { font-family: "Playfair Display", serif; font-size: 26px; }
+.card-price { font-family: "Cormorant Garamond", serif; font-size: 26px; }
 .add-btn {
   padding: 12px 22px; border-radius: 999px;
   background: var(--rose-bg); color: var(--rose);
   font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
   font-weight: 700;
-  border: 1px solid rgba(114,36,62,0.28);
-  box-shadow: 0 4px 14px rgba(114,36,62,0.1);
+  border: 1px solid rgba(139,30,60,0.28);
+  box-shadow: 0 4px 14px rgba(139,30,60,0.1);
   transition: background .2s, box-shadow .2s, color .2s, border-color .2s;
 }
-.add-btn:hover { background: var(--rose); color: var(--cream); border-color: var(--rose); box-shadow: 0 8px 22px rgba(114,36,62,0.24); }
+.add-btn:hover { background: var(--rose); color: var(--cream); border-color: var(--rose); box-shadow: 0 8px 22px rgba(139,30,60,0.24); }
 .add-btn.added { background: var(--green-bg); color: var(--green); border-color: rgba(11,74,50,0.3); }
 
 /* ===================== ABOUT ===================== */
 .about-hero {
-  background: var(--rose-soft);
+  background: var(--terracotta-bg);
   color: var(--ink);
   padding: 200px 0 140px;
   position: relative; overflow: hidden;
@@ -836,13 +839,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .value-card {
   background: white; border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 32px 26px;
   min-height: 200px;
   display: flex; flex-direction: column;
 }
 .value-card .num {
-  font-family: "Playfair Display", serif; font-style: italic;
+  font-family: "Cormorant Garamond", serif; font-style: italic;
   color: var(--rose); font-size: 24px;
   margin-bottom: 16px;
 }
@@ -858,7 +861,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   text-align: center;
 }
 .about-cta blockquote {
-  font-family: "Playfair Display", serif; font-style: italic;
+  font-family: "Cormorant Garamond", serif; font-style: italic;
   font-size: clamp(36px, 4vw, 56px);
   line-height: 1.15;
   max-width: 900px; margin: 24px auto 32px;
@@ -886,11 +889,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   border-radius: 50%; background: var(--rose);
   display: flex; align-items: center; justify-content: center;
   color: var(--cream);
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 56px; letter-spacing: 0.05em;
 }
 .founder-card h4 { font-size: 24px; }
-.founder-card .role { font-style: italic; color: var(--rose); font-family: "Playfair Display", serif; font-size: 16px; margin-top: 4px; }
+.founder-card .role { font-style: italic; color: var(--rose); font-family: "Cormorant Garamond", serif; font-size: 16px; margin-top: 4px; }
 .founder-msg h2 {
   font-size: clamp(36px, 4vw, 52px); margin-bottom: 28px;
 }
@@ -901,7 +904,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .signature {
   margin-top: 32px;
-  font-family: "Playfair Display", serif; font-style: italic; font-size: 26px;
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 26px;
   color: var(--rose);
 }
 
@@ -963,7 +966,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   background: rgba(255,255,255,0.85); margin-top: 6px;
 }
 .school-row h5 {
-  font-family: "Playfair Display", serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 19px; font-weight: 500;
   margin-bottom: 6px; color: var(--cream);
 }
@@ -990,7 +993,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   background: white; border-radius: 6px; padding: 36px;
 }
 .claim-col.good { border: 1px solid rgba(11,74,50,0.2); }
-.claim-col.bad { border: 1px solid rgba(114,36,62,0.2); }
+.claim-col.bad { border: 1px solid rgba(139,30,60,0.2); }
 .claim-col h4 {
   font-family: "DM Sans", sans-serif; font-weight: 500;
   font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -1005,13 +1008,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .claim-item:first-of-type { border-top: 0; padding-top: 0; }
 .claim-item .arrow {
-  font-family: "Playfair Display", serif; font-style: italic;
+  font-family: "Cormorant Garamond", serif; font-style: italic;
   font-size: 18px;
   flex-shrink: 0;
 }
 .claim-col.good .arrow { color: var(--green); }
 .claim-col.bad .arrow { color: var(--rose); }
-.claim-col.bad .claim-item { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(114,36,62,0.25); }
+.claim-col.bad .claim-item { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(139,30,60,0.25); }
 
 /* quiz */
 .quiz-section {
@@ -1298,7 +1301,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   text-transform: uppercase; color: var(--rose);
 }
 .pdp-title { font-size: clamp(40px, 5vw, 64px); margin: 14px 0 10px; line-height: 1; }
-.pdp-tagline { font-family: "Playfair Display", serif; font-style: italic; font-size: 22px; color: var(--rose); margin-bottom: 22px; }
+.pdp-tagline { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 22px; color: var(--rose); margin-bottom: 22px; }
 .pdp-desc { font-size: 16px; color: var(--ink-2); line-height: 1.65; margin-bottom: 28px; }
 
 .pdp-specs {
@@ -1317,7 +1320,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .pdp-selected-sw { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); flex-shrink: 0; }
 .pdp-selected-label { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.pdp-selected-name { font-family: "Playfair Display", serif; font-size: 20px; margin-top: 2px; }
+.pdp-selected-name { font-family: "Cormorant Garamond", serif; font-size: 20px; margin-top: 2px; }
 .pdp-selected-name em { font-style: italic; color: var(--rose); font-size: 16px; }
 
 /* shade ranges */
@@ -1370,7 +1373,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .corrector-fix { font-size: 11px; color: var(--muted); }
 
 .pdp-buy { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
-.pdp-price { font-family: "Playfair Display", serif; font-size: 34px; }
+.pdp-price { font-family: "Cormorant Garamond", serif; font-size: 34px; }
 .pdp-add { flex: 1; justify-content: center; padding: 18px 24px; text-transform: none; letter-spacing: 0.02em; font-size: 15px; }
 .pdp-add.added { background: var(--green); }
 .pdp-ship { margin-top: 12px; font-family: "DM Mono", monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
@@ -1389,7 +1392,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 .pdp-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
 .pdp-benefit { }
-.pdp-benefit-no { font-family: "Playfair Display", serif; font-style: italic; font-size: 28px; }
+.pdp-benefit-no { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 28px; }
 .pdp-benefit h4 { font-size: 20px; margin: 12px 0 8px; }
 .pdp-benefit p { font-size: 14px; color: var(--muted); line-height: 1.55; }
 
@@ -1401,7 +1404,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .pdp-active-row p { font-size: 14px; color: var(--muted); line-height: 1.55; }
 
 .pdp-how { max-width: 760px; }
-.pdp-how-text { font-family: "Playfair Display", serif; font-size: 26px; line-height: 1.4; color: var(--ink); }
+.pdp-how-text { font-family: "Cormorant Garamond", serif; font-size: 26px; line-height: 1.4; color: var(--ink); }
 .pdp-how-note { margin-top: 28px; font-size: 12px; letter-spacing: 0.04em; color: var(--muted); padding-top: 20px; border-top: 1px solid var(--line); }
 
 .pdp-inci { max-width: 880px; }
@@ -1430,7 +1433,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   width: 28px; height: 28px; border-radius: 50%;
   background: var(--green-bg); color: var(--green); font-size: 14px; margin-bottom: 14px;
 }
-.pdp-cert-label { font-family: "Playfair Display", serif; font-size: 19px; margin-bottom: 4px; }
+.pdp-cert-label { font-family: "Cormorant Garamond", serif; font-size: 19px; margin-bottom: 4px; }
 .pdp-cert-note { font-size: 12px; color: var(--muted); }
 
 /* shelf */
@@ -1456,7 +1459,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .shelf-plank { height: 16px; background: #c3b095; box-shadow: 0 -6px 18px rgba(0,0,0,0.12), inset 0 2px 0 rgba(255,255,255,0.3); }
 .shelf-brandline {
   text-align: center; padding: 16px; background: #b09c80;
-  font-family: "Playfair Display", serif; font-style: italic; font-size: 14px; letter-spacing: 0.08em;
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; letter-spacing: 0.08em;
   color: var(--cream);
 }
 
@@ -1475,7 +1478,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .pdp-cross-info .label { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .pdp-cross-info h3 { font-size: 26px; margin: 8px 0 8px; }
 .pdp-cross-info p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
-.pdp-cross-price { margin-top: auto; font-family: "Playfair Display", serif; font-size: 24px; }
+.pdp-cross-price { margin-top: auto; font-family: "Cormorant Garamond", serif; font-size: 24px; }
 .pdp-cross-price .arrow { color: var(--rose); transition: transform .2s; display: inline-block; }
 .pdp-cross-card:hover .arrow { transform: translateX(5px); }
 
@@ -1501,4 +1504,25 @@ main.pdp [data-reveal] {
   transform: none !important;
   animation: none !important;
   transition: none !important;
+}
+
+/* ---------- shade match strip ---------- */
+.shade-match-strip {
+  background: var(--terracotta-bg);
+  padding: 100px 0;
+  border-top: 1px solid rgba(196,98,45,0.1);
+  border-bottom: 1px solid rgba(196,98,45,0.1);
+}
+.shade-match-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: center;
+}
+.shade-match-feature {
+  display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--ink-2);
+}
+.shade-match-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--terracotta); flex-shrink: 0;
+}
+@media (max-width: 980px) {
+  .shade-match-grid { grid-template-columns: 1fr; gap: 40px; }
 }

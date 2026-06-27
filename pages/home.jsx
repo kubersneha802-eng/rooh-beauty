@@ -44,14 +44,16 @@ function HomePage({ setPage, cart }) {
           {[...Array(2)].map((_, n) => (
             <React.Fragment key={n}>
               <span className="marquee-item">Niacinamide 5%</span>
+              <span className="marquee-item">Tranexamic Acid 2%</span>
               <span className="marquee-item">Ceramide NP</span>
-              <span className="marquee-item">Centella Asiatica</span>
+              <span className="marquee-item">Azelaic Acid 5%</span>
               <span className="marquee-item">Fragrance-Free</span>
+              <span className="marquee-item">Centella Asiatica</span>
               <span className="marquee-item">Sensitive Skin Tested</span>
               <span className="marquee-item">Non-Comedogenic</span>
               <span className="marquee-item">Dermatologist Tested</span>
               <span className="marquee-item">Vegan & Cruelty-Free</span>
-              <span className="marquee-item">40 Foundation Shades</span>
+              <span className="marquee-item">90 Shades</span>
               <span className="marquee-item">Hyaluronic Acid</span>
             </React.Fragment>
           ))}
@@ -88,6 +90,40 @@ function HomePage({ setPage, cart }) {
               <div className="feature-icon" style={{ background: "var(--violet-bg)", color: "var(--violet)" }}>◈</div>
               <h3>Shades for every story</h3>
               <p>90 shades across three hero products with peach, green, and violet correctors built for hyperpigmentation, dark circles, and two-toned lips.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI SHADE MATCH */}
+      <section className="shade-match-strip">
+        <div className="container">
+          <div className="shade-match-grid">
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--terracotta)' }}>Shade Intelligence · 2027</div>
+              <h2 data-reveal style={{ fontSize: 'clamp(36px, 4vw, 60px)', marginTop: 16, maxWidth: 620 }}>
+                Your perfect match,<br/><span style={{ fontStyle: 'italic', color: 'var(--terracotta)' }}>found in seconds.</span>
+              </h2>
+              <p data-reveal style={{ '--reveal-delay': '100ms', marginTop: 24, fontSize: 17, color: 'var(--muted)', maxWidth: 480, lineHeight: 1.65 }}>
+                Our AI shade tool reads your skin undertone, depth, and two-tone differential — then maps you to your foundation and concealer. No guessing. No returns.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 28, alignItems: 'flex-start' }} data-reveal style={{ '--reveal-delay': '160ms' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {['Undertone analysis', 'Depth mapping', 'Two-tone correction'].map((f) => (
+                  <div key={f} className="shade-match-feature">
+                    <span className="shade-match-dot"></span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+              <button className="btn" style={{ background: 'var(--terracotta)', color: 'var(--cream)' }} onClick={() => setPage('shop')}>
+                Try Shade Match
+                <span className="arrow" style={{ marginLeft: 4 }}>→</span>
+              </button>
+              <div style={{ fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)' }}>
+                No account needed · Works on all skin tones
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +172,9 @@ function HomePage({ setPage, cart }) {
               </p>
               <div className="pill-row">
                 <span className="pill">Niacinamide 5%</span>
+                <span className="pill">Tranexamic Acid 2%</span>
                 <span className="pill">Ceramide NP</span>
+                <span className="pill">Azelaic Acid 5%</span>
                 <span className="pill">Centella Asiatica</span>
                 <span className="pill">Hyaluronic Acid</span>
                 <span className="pill">Bisabolol</span>
@@ -157,10 +195,10 @@ function HomePage({ setPage, cart }) {
               </div>
               <div className="ing-card">
                 <div>
-                  <div className="dot" style={{ background: "#A7B27A" }}></div>
-                  <h4>Centella Asiatica</h4>
+                  <div className="dot" style={{ background: "#C4622D" }}></div>
+                  <h4>Tranexamic Acid</h4>
                 </div>
-                <span>Soothes reactive skin and reduces visible irritation over time.</span>
+                <span>Targets hyperpigmentation and dark spots at the source — without the irritation of acids.</span>
               </div>
               <div className="ing-card">
                 <div>

@@ -187,7 +187,7 @@ const FOUNDATION_HERO = [
   FOUNDATION_GROUPS[1].shades[2], // Brunch Drip
   FOUNDATION_GROUPS[2].shades[3], // Hired
   FOUNDATION_GROUPS[1].shades[5], // Espresso Slay
-  FOUNDATION_GROUPS[0].shades[8], // Deep & Iconic
+  FOUNDATION_GROUPS[0].shades[7], // Unbothered & Dark
 ];
 const CONCEALER_HERO = [
   CONCEALER_GROUPS[0].shades[0],

@@ -65,7 +65,7 @@ function SkinSchoolPage({ setPage, cart }) {
         <section className="school-intro">
           <div>
             <div className="eyebrow">Lesson 01</div>
-            <h2 style={{ marginTop: 12 }}>
+            <h2 style={{ marginTop: 16 }}>
               Why skincare in makeup <span className="accent">matters.</span>
             </h2>
           </div>
@@ -202,7 +202,7 @@ function SkinSchoolPage({ setPage, cart }) {
       <div className="container" style={{ paddingTop: 80 }}>
         <div className="claims-box">
           <div className="eyebrow">Lesson 06 · Honesty</div>
-          <h2 style={{ marginTop: 12 }}>
+          <h2 style={{ marginTop: 16 }}>
             What we say. <span className="accent">What we don't.</span>
           </h2>
           <p>

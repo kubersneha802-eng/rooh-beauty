@@ -108,7 +108,7 @@ function HomePage({ setPage, cart }) {
                 Our AI shade tool reads your skin undertone, depth, and two-tone differential — then maps you to your foundation and concealer. No guessing. No returns.
               </p>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 28, alignItems: 'flex-start' }} data-reveal style={{ '--reveal-delay': '160ms' }}>
+            <div data-reveal style={{ display: 'flex', flexDirection: 'column', gap: 28, alignItems: 'flex-start', '--reveal-delay': '160ms' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {['Undertone analysis', 'Depth mapping', 'Two-tone correction'].map((f) => (
                   <div key={f} className="shade-match-feature">
@@ -132,7 +132,7 @@ function HomePage({ setPage, cart }) {
       {/* PRODUCT TEASERS */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div style={{ marginBottom: 56 }}>
+          <div style={{ marginBottom: 64 }}>
             <div className="eyebrow">Three heroes</div>
             <h2 style={{ fontSize: "clamp(40px, 5vw, 72px)", marginTop: 16, maxWidth: 800 }}>
               The whole collection. <span style={{ fontStyle: "italic", color: "var(--rose)" }}>For now.</span>

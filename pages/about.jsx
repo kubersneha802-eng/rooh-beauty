@@ -22,7 +22,7 @@ function AboutPage({ setPage }) {
         <section className="about-story">
           <div className="about-story-text">
             <div className="eyebrow">Origin</div>
-            <h2 style={{ marginTop: 12 }}>
+            <h2 style={{ marginTop: 16 }}>
               We built it because <span className="accent">no one else would.</span>
             </h2>
             <p>
@@ -102,7 +102,7 @@ function AboutPage({ setPage }) {
           </div>
           <div className="founder-msg">
             <div className="eyebrow">A note from the founder</div>
-            <h2 style={{ marginTop: 12 }}>
+            <h2 style={{ marginTop: 16 }}>
               I built this because I needed it. <span className="accent">First.</span>
             </h2>
             <p>

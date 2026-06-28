@@ -102,8 +102,6 @@ const LIP_GROUPS = [
     code: "L",
     note: "Your-lips-but-better",
     shades: [
-      { name: "Soft Launch Nude",   code: "L-02", color: "#D7A78A" },
-      { name: "Chronically Beige",  code: "L-03", color: "#C68F73" },
       { name: "My Actual Lip Color",code: "L-04", color: "#B4795A" },
       { name: "Terracotta Timeout", code: "L-05", color: "#A85B3D" },
     ],
@@ -154,12 +152,12 @@ const CONCEALER_HERO = [
   COLOR_CORRECTORS[2],
 ];
 const LIP_HERO = [
-  LIP_GROUPS[0].shades[0],  // Soft Launch Nude   (L-02)
-  LIP_GROUPS[1].shades[1],  // Hot Girl Rosé      (L-09)
-  LIP_GROUPS[2].shades[0],  // Running Late Red   (L-13)
-  LIP_GROUPS[2].shades[2],  // In My Feelings     (L-15)
-  LIP_GROUPS[0].shades[3],  // Terracotta Timeout (L-05)
-  LIP_GROUPS[1].shades[3],  // Main Character Rose(L-11)
+  LIP_GROUPS[0].shades[0],  // My Actual Lip Color (L-04)
+  LIP_GROUPS[1].shades[1],  // Hot Girl Rosé       (L-09)
+  LIP_GROUPS[2].shades[0],  // Running Late Red    (L-13)
+  LIP_GROUPS[2].shades[2],  // In My Feelings      (L-15)
+  LIP_GROUPS[0].shades[1],  // Terracotta Timeout  (L-05)
+  LIP_GROUPS[1].shades[3],  // Main Character Rose (L-11)
 ];
 
 /* back-compat aliases used by home teasers */
@@ -245,13 +243,13 @@ const PRODUCTS = [
     tagline: "A peptide lip treatment that happens to be gorgeous",
     desc: "High-shine balm-gloss with tripeptides, shea butter & hyaluronic acid.",
     longDesc:
-      "Non-sticky, mirror-shine gloss that treats your lips while it colors them. Tripeptides support the lip border (great for two-toned lips), shea and hyaluronic acid cushion and hydrate, and 11 buildable shades go from your-lips-but-better to full statement red. The peach-warm base quietly evens lip tone as you wear it.",
+      "Non-sticky, mirror-shine gloss that treats your lips while it colors them. Tripeptides support the lip border (great for two-toned lips), shea and hyaluronic acid cushion and hydrate, and 9 buildable shades go from your-lips-but-better to full statement red. The peach-warm base quietly evens lip tone as you wear it.",
     price: 18,
     finish: "High-shine · non-sticky",
     coverage: "Sheer to medium · buildable",
     size: "6 ml / 0.20 fl oz",
     actives: ["Tripeptides", "Shea Butter", "Hyaluronic Acid"],
-    shadeCount: "11 shades · 3 families",
+    shadeCount: "9 shades · 3 families",
     shadeNoun: "shade",
     shadeGroups: LIP_GROUPS,
     shades: LIP_HERO,
@@ -261,7 +259,7 @@ const PRODUCTS = [
       { title: "Treats two-toned lips", body: "Warm peach-based pigments visually even the lip border while peptides support definition." },
       { title: "Mirror shine, zero stick", body: "A cushioned gloss that feels like balm and shines like glass — no tacky pull." },
       { title: "All-day hydration", body: "Shea butter and hyaluronic acid keep lips soft and plump for hours." },
-      { title: "11 buildable shades", body: "From sheer nudes to statement reds — every shade works on South Asian skin." },
+      { title: "9 buildable shades", body: "From your-lips-but-better nudes to statement reds — every shade works on South Asian skin." },
     ],
     actives_detail: [
       { name: "Palmitoyl Tripeptide-1", pct: "—", body: "Supports collagen and the appearance of lip definition." },

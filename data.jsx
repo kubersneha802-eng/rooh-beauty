@@ -81,9 +81,9 @@ const CONCEALER_GROUPS = [
     code: "CC-C",
     note: "Cool-toned sculpting",
     shades: [
-      { name: "Contour Behavior",  code: "CC-C1", depth: "contour", color: "#3E2A18" },
-      { name: "Snatched Honestly", code: "CC-C3", depth: "contour", color: "#2A1C0E" },
-      { name: "Professional Slay", code: "CC-C5", depth: "contour", color: "#1A1008" },
+      { name: "Contour Behavior",  code: "CC-C1", depth: "contour", color: "#8C6347" },
+      { name: "Snatched Honestly", code: "CC-C3", depth: "contour", color: "#5E3920" },
+      { name: "Professional Slay", code: "CC-C5", depth: "contour", color: "#3D2210" },
     ],
   },
 ];

@@ -90,10 +90,11 @@ function ProductPage({ productId, cart, setPage }) {
         <div className="container-wide">
           <div className="pdp-tabs">
             {[
-              ["benefits", "Benefits"],
-              ["actives", "Key actives"],
-              ["how", "How to use"],
-              ["inci", "Full ingredients"],
+              ["benefits",  "Benefits"],
+              ["actives",   "Key actives"],
+              ["how",       "How to use"],
+              ["inci",      "Full ingredients"],
+              ["match",     "Find my shade"],
             ].map(([id, label]) => (
               <button key={id} className={`pdp-tab ${tab === id ? "on" : ""}`} onClick={() => setTab(id)}>
                 {label}
@@ -144,6 +145,15 @@ function ProductPage({ productId, cart, setPage }) {
                   <span>Clean, vegan formula — formulated without parabens, sulfates, phthalates, added fragrance, mineral oil, and animal-derived ingredients.</span>
                 </div>
               </div>
+            )}
+
+            {tab === "match" && (
+              <ShadeQuiz
+                key="match"
+                product={product}
+                allShades={allShades}
+                onMatch={(shade) => { setSel(shade); setTab("benefits"); }}
+              />
             )}
           </div>
         </div>
@@ -211,7 +221,7 @@ function ProductPage({ productId, cart, setPage }) {
   );
 }
 
-/* ----- shade range selector (flat, lightest → darkest) ----- */
+/* ----- shade range selector (flat, darkest → lightest) ----- */
 function hexLuminance(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -222,7 +232,7 @@ function hexLuminance(hex) {
 function ShadeRanges({ groups, correctors, sel, onSelect, noun }) {
   const sorted = groups
     .reduce((all, g) => all.concat(g.shades), [])
-    .sort((a, b) => hexLuminance(b.color) - hexLuminance(a.color));
+    .sort((a, b) => hexLuminance(a.color) - hexLuminance(b.color));
   const total = sorted.length + (correctors ? correctors.length : 0);
   return (
     <div className="shade-ranges">
@@ -269,6 +279,142 @@ function ShadeRanges({ groups, correctors, sel, onSelect, noun }) {
             ))}
           </div>
         </div>
+      )}
+    </div>
+  );
+}
+
+/* ----- shade match quiz ----- */
+function ShadeQuiz({ product, allShades, onMatch }) {
+  const [step, setStep]       = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [result, setResult]   = useState(null);
+
+  const depthOptions = [
+    { value: "fair",      label: "Fair",         hint: "Lighter SA skin, some pink or peach warmth",   color: "#C9A07A" },
+    { value: "light",     label: "Light",        hint: "Light golden or peachy-beige tones",            color: "#B8895C" },
+    { value: "light-med", label: "Light-Medium", hint: "The most common SA range — warm beige to tan", color: "#A07444" },
+    { value: "medium",    label: "Medium",       hint: "Warm caramel, tan, honey",                      color: "#8B6040" },
+    { value: "med-deep",  label: "Medium-Deep",  hint: "Deep caramel to rich brown",                    color: "#6F4A2E" },
+    { value: "deep",      label: "Deep",         hint: "Rich, deep skin tones",                         color: "#4E3220" },
+  ];
+
+  const undertoneOptions = [
+    { value: "warm",    label: "Warm",    hint: "Golden, yellow-leaning — gold jewellery flatters you",       color: "#C9A55A" },
+    { value: "cool",    label: "Cool",    hint: "Pink, rosy-leaning — silver jewellery complements you",      color: "#C4849B" },
+    { value: "neutral", label: "Neutral", hint: "Balanced mix — both metals work equally well",               color: "#B8906C" },
+    { value: "olive",   label: "Olive",   hint: "Yellow-green leaning — some foundations look ashy on you",  color: "#8A7A4A" },
+  ];
+
+  const vibeOptions = [
+    { value: "nude", label: "Natural YLBB",    hint: "Your-lips-but-better. Everyday effortless." },
+    { value: "pink", label: "Flushed & Fresh", hint: "A wash of pink or rose — soft and playful." },
+    { value: "bold", label: "Statement Red",   hint: "Full-send. You walked in and the room noticed." },
+  ];
+
+  const isLip        = product.id === "lip";
+  const isFoundation = product.id === "foundation";
+
+  const questions = isLip
+    ? [
+        { key: "vibe",      options: vibeOptions,      question: "What's the vibe today?" },
+        { key: "depth",     options: depthOptions,     question: "How deep is your skin tone?" },
+      ]
+    : [
+        { key: "depth",     options: depthOptions,     question: "How deep is your skin tone?" },
+        { key: "undertone", options: undertoneOptions,  question: "What's your undertone?" },
+      ];
+
+  const computeResult = (ans) => {
+    if (isLip) {
+      const vibeMap = {
+        nude: ["L-04", "L-05"],
+        pink: ["L-08", "L-09", "L-10", "L-11"],
+        bold: ["L-13", "L-14", "L-15"],
+      };
+      const family    = vibeMap[ans.vibe] || vibeMap.nude;
+      const depthIdx  = ["fair","light","light-med","medium","med-deep","deep"].indexOf(ans.depth);
+      const pickIdx   = Math.min(Math.floor(depthIdx * family.length / 6), family.length - 1);
+      return allShades.find(s => s.code === family[pickIdx]) || allShades[0];
+    }
+
+    if (isFoundation) {
+      const map = {
+        "fair-warm":         "W-01", "fair-cool":         "C-01", "fair-neutral":       "N-02", "fair-olive":         "O-03",
+        "light-warm":        "W-02", "light-cool":        "C-01", "light-neutral":      "N-02", "light-olive":        "O-03",
+        "light-med-warm":    "W-03", "light-med-cool":    "C-04", "light-med-neutral":  "N-03", "light-med-olive":    "O-03",
+        "medium-warm":       "W-04", "medium-cool":       "C-04", "medium-neutral":     "N-04", "medium-olive":       "O-04",
+        "med-deep-warm":     "W-05", "med-deep-cool":     "C-06", "med-deep-neutral":   "N-05", "med-deep-olive":     "O-05",
+        "deep-warm":         "W-05", "deep-cool":         "C-06", "deep-neutral":       "N-05", "deep-olive":         "O-05",
+      };
+      return allShades.find(s => s.code === map[`${ans.depth}-${ans.undertone}`]) || allShades[0];
+    }
+
+    // concealer — match by depth to cover shade
+    const concealerMap = {
+      "fair": "CC-02", "light": "CC-03", "light-med": "CC-04",
+      "medium": "CC-05", "med-deep": "CC-06", "deep": "CC-07",
+    };
+    return allShades.find(s => s.code === concealerMap[ans.depth]) || allShades[0];
+  };
+
+  const handleAnswer = (key, value) => {
+    const next = { ...answers, [key]: value };
+    setAnswers(next);
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+    } else {
+      setResult(computeResult(next));
+    }
+  };
+
+  const reset = () => { setStep(0); setAnswers({}); setResult(null); };
+
+  if (result) {
+    return (
+      <div className="quiz-result" data-reveal>
+        <div className="quiz-result-inner">
+          <div className="quiz-result-swatch" style={{ background: result.color }}></div>
+          <div className="quiz-result-text">
+            <div className="quiz-result-eyebrow mono">Your Rooh match</div>
+            <h3 className="quiz-result-name">{result.name}</h3>
+            <div className="quiz-result-code mono">{result.code}{result.depth ? ` · ${result.depth}` : ""}</div>
+          </div>
+        </div>
+        <div className="quiz-result-actions">
+          <button className="btn btn-primary" onClick={() => onMatch(result)}>
+            Select this shade →
+          </button>
+          <button className="btn btn-ghost quiz-retake" onClick={reset}>Retake quiz</button>
+        </div>
+      </div>
+    );
+  }
+
+  const q = questions[step];
+  const swatched = q.key === "depth" || q.key === "undertone";
+
+  return (
+    <div className="quiz-wrap" data-reveal>
+      <div className="quiz-header">
+        <div className="quiz-progress mono">
+          {questions.map((_, i) => (
+            <span key={i} className={`quiz-dot ${i <= step ? "active" : ""}`}></span>
+          ))}
+        </div>
+        <p className="quiz-q">{q.question}</p>
+      </div>
+      <div className={`quiz-options ${swatched ? "quiz-options-swatched" : "quiz-options-text"}`}>
+        {q.options.map(opt => (
+          <button key={opt.value} className="quiz-opt" onClick={() => handleAnswer(q.key, opt.value)}>
+            {opt.color && <span className="quiz-opt-swatch" style={{ background: opt.color }}></span>}
+            <span className="quiz-opt-label">{opt.label}</span>
+            {opt.hint && <span className="quiz-opt-hint">{opt.hint}</span>}
+          </button>
+        ))}
+      </div>
+      {step > 0 && (
+        <button className="quiz-back mono" onClick={() => setStep(step - 1)}>← Back</button>
       )}
     </div>
   );

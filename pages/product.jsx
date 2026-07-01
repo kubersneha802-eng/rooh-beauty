@@ -286,76 +286,128 @@ function ShadeRanges({ groups, correctors, sel, onSelect, noun }) {
 
 /* ----- shade match quiz ----- */
 function ShadeQuiz({ product, allShades, onMatch }) {
-  const [step, setStep]       = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [result, setResult]   = useState(null);
+  const [phase, setPhase]       = useState("intro");
+  const [step, setStep]         = useState(0);
+  const [answers, setAnswers]   = useState({});
+  const [result, setResult]     = useState(null);
+  const [adjacent, setAdjacent] = useState([]);
 
   const depthOptions = [
-    { value: "fair",      label: "Fair",         hint: "Lighter SA skin, some pink or peach warmth",   color: "#C9A07A" },
-    { value: "light",     label: "Light",        hint: "Light golden or peachy-beige tones",            color: "#B8895C" },
-    { value: "light-med", label: "Light-Medium", hint: "The most common SA range — warm beige to tan", color: "#A07444" },
-    { value: "medium",    label: "Medium",       hint: "Warm caramel, tan, honey",                      color: "#8B6040" },
-    { value: "med-deep",  label: "Medium-Deep",  hint: "Deep caramel to rich brown",                    color: "#6F4A2E" },
-    { value: "deep",      label: "Deep",         hint: "Rich, deep skin tones",                         color: "#4E3220" },
+    { value: "fair",      label: "Fair",         hint: "Lighter SA skin — some visible pink or peachy warmth",      color: "#C9A07A" },
+    { value: "light",     label: "Light",        hint: "Light golden or peachy-beige, warm undertone visible",      color: "#B8895C" },
+    { value: "light-med", label: "Light-Medium", hint: "The most common SA range — warm beige to golden tan",      color: "#A07444" },
+    { value: "medium",    label: "Medium",       hint: "Warm caramel, honey, tan — classic South Asian depth",      color: "#8B6040" },
+    { value: "med-deep",  label: "Medium-Deep",  hint: "Deep caramel to rich brown, full warm saturation",          color: "#6F4A2E" },
+    { value: "deep",      label: "Deep",         hint: "Rich, deep skin — maximum depth and warmth",               color: "#4E3220" },
   ];
 
   const undertoneOptions = [
-    { value: "warm",    label: "Warm",    hint: "Golden, yellow-leaning — gold jewellery flatters you",       color: "#C9A55A" },
-    { value: "cool",    label: "Cool",    hint: "Pink, rosy-leaning — silver jewellery complements you",      color: "#C4849B" },
-    { value: "neutral", label: "Neutral", hint: "Balanced mix — both metals work equally well",               color: "#B8906C" },
-    { value: "olive",   label: "Olive",   hint: "Yellow-green leaning — some foundations look ashy on you",  color: "#8A7A4A" },
+    { value: "warm",    label: "Warm",    hint: "Golden, yellow-leaning. Gold jewellery flatters you most. You tan easily and evenly.",         color: "#C9A55A" },
+    { value: "cool",    label: "Cool",    hint: "Pink or rosy-leaning. Silver jewellery looks best. You may burn before you tan.",             color: "#C4849B" },
+    { value: "neutral", label: "Neutral", hint: "Balanced — neither too warm nor cool. Both metals look equally good on you.",                   color: "#B8906C" },
+    { value: "olive",   label: "Olive",   hint: "Yellow-green leaning. Some foundations look ashy or grey on you. Sallow cast is common.",      color: "#8A7A4A" },
+  ];
+
+  const concernOptions = [
+    { value: "hyperpig", label: "Hyperpigmentation & dark marks",  hint: "Post-acne spots, sun damage, uneven patches — this is the main thing I want coverage to address", icon: "✦" },
+    { value: "acne",     label: "Acne-prone & oily skin",          hint: "Breakouts, clogged pores, and midday shine — I need coverage that doesn't make it worse",          icon: "◎" },
+    { value: "redness",  label: "Redness & sensitivity",           hint: "My skin reacts easily — visible redness, rosacea-adjacent, or general sensitivity",                icon: "◇" },
+    { value: "dullness", label: "Dullness & dehydration",          hint: "Skin looks flat, tired, or tight — I want coverage that adds glow, not weight",                   icon: "○" },
+  ];
+
+  const concealConcernOptions = [
+    { value: "circles", label: "Dark circles",           hint: "Under-eye discoloration, shadow, or puffiness — the main reason I reach for concealer", icon: "◯" },
+    { value: "blemish", label: "Active blemishes",       hint: "Covering spots, active breakouts, or redness around blemishes in real time",            icon: "◎" },
+    { value: "marks",   label: "Post-acne marks & PIH",  hint: "Flat dark spots left behind after breakouts — hyperpigmentation that lingers for weeks", icon: "✦" },
+    { value: "all",     label: "All of the above",       hint: "The full coverage routine — dark circles, active spots, and lingering marks.",            icon: "★" },
   ];
 
   const vibeOptions = [
-    { value: "nude", label: "Natural YLBB",    hint: "Your-lips-but-better. Everyday effortless." },
-    { value: "pink", label: "Flushed & Fresh", hint: "A wash of pink or rose — soft and playful." },
-    { value: "bold", label: "Statement Red",   hint: "Full-send. You walked in and the room noticed." },
+    { value: "nude", label: "Your Lips But Better",  hint: "Effortless, natural warmth — a barely-there wash of color that looks like your best lip day", icon: "◇" },
+    { value: "pink", label: "Flushed & Flirty",      hint: "A soft pink or rose that reads like you just came in from outside — fresh and deeply flattering on SA skin", icon: "◎" },
+    { value: "bold", label: "Full Statement",        hint: "Full-send, no-explanation-needed red. You walked in and the room did a double take.",          icon: "✦" },
+  ];
+
+  const occasionOptions = [
+    { value: "daily", label: "Everyday wear",  hint: "Work, errands, casual days out — needs to work for all of it without effort",   icon: "○" },
+    { value: "glam",  label: "Occasion glam",  hint: "Events, weddings, dinner — I want it to read intentional and polished",         icon: "★" },
+    { value: "both",  label: "I want both",    hint: "A shade I can wear daily that still turns heads when I layer it up",            icon: "◎" },
   ];
 
   const isLip        = product.id === "lip";
   const isFoundation = product.id === "foundation";
 
-  const questions = isLip
-    ? [
-        { key: "vibe",      options: vibeOptions,      question: "What's the vibe today?" },
-        { key: "depth",     options: depthOptions,     question: "How deep is your skin tone?" },
-      ]
-    : [
-        { key: "depth",     options: depthOptions,     question: "How deep is your skin tone?" },
-        { key: "undertone", options: undertoneOptions,  question: "What's your undertone?" },
-      ];
+  const questions = isLip ? [
+    { key: "vibe",      options: vibeOptions,            question: "What's the vibe today?",               swatched: false },
+    { key: "depth",     options: depthOptions,           question: "How deep is your skin tone?",           swatched: true  },
+    { key: "occasion",  options: occasionOptions,        question: "When are you reaching for this?",       swatched: false },
+  ] : isFoundation ? [
+    { key: "depth",     options: depthOptions,           question: "How deep is your skin tone?",           swatched: true  },
+    { key: "undertone", options: undertoneOptions,       question: "What's your undertone?",                swatched: true  },
+    { key: "concern",   options: concernOptions,         question: "What does your skin need most?",        swatched: false },
+  ] : [
+    { key: "concern",   options: concealConcernOptions,  question: "What are you covering?",                swatched: false },
+    { key: "depth",     options: depthOptions,           question: "How deep is your skin tone?",           swatched: true  },
+    { key: "undertone", options: undertoneOptions,       question: "What's your undertone?",                swatched: true  },
+  ];
+
+  const getPersonalizedCopy = (ans) => {
+    if (isFoundation) {
+      const c = {
+        hyperpig: "Niacinamide 5% actively fades hyperpigmentation and post-acne marks while you wear it — targeted treatment built into every shade.",
+        acne:     "Non-comedogenic and zinc-infused — full coverage that keeps acne-prone skin calm without clogging pores.",
+        redness:  "Centella asiatica 2% calms visible redness throughout the full wear. It's in the formula, not just on the label.",
+        dullness: "Ceramide NP and sodium hyaluronate keep skin plump and hydrated for a naturally lit finish that doesn't cake by noon.",
+      };
+      return c[ans.concern] || "";
+    }
+    if (product.id === "concealer") {
+      const c = {
+        circles: "Pair with the Peach, Please corrector first — it neutralizes blue-dark under-eye tones before this shade covers completely.",
+        blemish:  "Zinc PCA in every shade actively calms blemishes beneath full-coverage color — not just a cover-up.",
+        marks:    "Stable vitamin C (SAP 3%) brightens post-acne marks while this shade covers them — treating while you conceal.",
+        all:      "Start with the corrector matched to your concern, then layer this shade on top. Two steps, zero trace.",
+      };
+      return c[ans.concern] || "";
+    }
+    if (isLip) {
+      const c = {
+        nude: "Warm peach-based pigments visually even two-toned lips — the lip border softens and the inner lip warms. YLBB but make it science.",
+        pink: "This rose-family shade is calibrated to flatter South Asian skin without reading too candy or too pale — the undertone does the work.",
+        bold: "Full pigment payoff with peptide support. Tripeptides work on the lip border so the color sits clean and sharp.",
+      };
+      return c[ans.vibe] || "";
+    }
+    return "";
+  };
 
   const computeResult = (ans) => {
+    let code;
     if (isLip) {
-      const vibeMap = {
-        nude: ["L-04", "L-05"],
-        pink: ["L-08", "L-09", "L-10", "L-11"],
-        bold: ["L-13", "L-14", "L-15"],
+      const m = {
+        nude: { daily: "L-04", glam: "L-05", both: "L-04" },
+        pink: { daily: "L-09", glam: "L-11", both: "L-10" },
+        bold: { daily: "L-14", glam: "L-13", both: "L-15" },
       };
-      const family    = vibeMap[ans.vibe] || vibeMap.nude;
-      const depthIdx  = ["fair","light","light-med","medium","med-deep","deep"].indexOf(ans.depth);
-      const pickIdx   = Math.min(Math.floor(depthIdx * family.length / 6), family.length - 1);
-      return allShades.find(s => s.code === family[pickIdx]) || allShades[0];
-    }
-
-    if (isFoundation) {
-      const map = {
-        "fair-warm":         "W-01", "fair-cool":         "C-01", "fair-neutral":       "N-02", "fair-olive":         "O-03",
-        "light-warm":        "W-02", "light-cool":        "C-01", "light-neutral":      "N-02", "light-olive":        "O-03",
-        "light-med-warm":    "W-03", "light-med-cool":    "C-04", "light-med-neutral":  "N-03", "light-med-olive":    "O-03",
-        "medium-warm":       "W-04", "medium-cool":       "C-04", "medium-neutral":     "N-04", "medium-olive":       "O-04",
-        "med-deep-warm":     "W-05", "med-deep-cool":     "C-06", "med-deep-neutral":   "N-05", "med-deep-olive":     "O-05",
-        "deep-warm":         "W-05", "deep-cool":         "C-06", "deep-neutral":       "N-05", "deep-olive":         "O-05",
+      code = ((m[ans.vibe] || m.nude)[ans.occasion]) || "L-04";
+      if (ans.vibe === "bold" && ["med-deep","deep"].includes(ans.depth)) code = "L-15";
+    } else if (isFoundation) {
+      const m = {
+        "fair-warm":"W-01",      "fair-cool":"C-01",      "fair-neutral":"N-02",    "fair-olive":"O-03",
+        "light-warm":"W-02",     "light-cool":"C-01",     "light-neutral":"N-02",   "light-olive":"O-03",
+        "light-med-warm":"W-03", "light-med-cool":"C-04", "light-med-neutral":"N-03","light-med-olive":"O-03",
+        "medium-warm":"W-04",    "medium-cool":"C-04",    "medium-neutral":"N-04",  "medium-olive":"O-04",
+        "med-deep-warm":"W-05",  "med-deep-cool":"C-06",  "med-deep-neutral":"N-05","med-deep-olive":"O-05",
+        "deep-warm":"W-05",      "deep-cool":"C-06",      "deep-neutral":"N-05",    "deep-olive":"O-05",
       };
-      return allShades.find(s => s.code === map[`${ans.depth}-${ans.undertone}`]) || allShades[0];
+      code = m[`${ans.depth}-${ans.undertone}`];
+    } else {
+      const m = { "fair":"CC-02","light":"CC-03","light-med":"CC-04","medium":"CC-05","med-deep":"CC-06","deep":"CC-07" };
+      code = m[ans.depth];
     }
-
-    // concealer — match by depth to cover shade
-    const concealerMap = {
-      "fair": "CC-02", "light": "CC-03", "light-med": "CC-04",
-      "medium": "CC-05", "med-deep": "CC-06", "deep": "CC-07",
-    };
-    return allShades.find(s => s.code === concealerMap[ans.depth]) || allShades[0];
+    const matched = allShades.find(s => s.code === code) || allShades[0];
+    const idx = allShades.findIndex(s => s.code === matched.code);
+    return { matched, adj: [allShades[idx - 1], allShades[idx + 1]].filter(Boolean) };
   };
 
   const handleAnswer = (key, value) => {
@@ -364,57 +416,89 @@ function ShadeQuiz({ product, allShades, onMatch }) {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
-      setResult(computeResult(next));
+      const { matched, adj } = computeResult(next);
+      setResult(matched);
+      setAdjacent(adj);
+      setPhase("result");
     }
   };
 
-  const reset = () => { setStep(0); setAnswers({}); setResult(null); };
+  const reset = () => { setStep(0); setAnswers({}); setResult(null); setAdjacent([]); setPhase("intro"); };
 
-  if (result) {
+  /* intro */
+  if (phase === "intro") {
     return (
-      <div className="quiz-result" data-reveal>
-        <div className="quiz-result-inner">
-          <div className="quiz-result-swatch" style={{ background: result.color }}></div>
-          <div className="quiz-result-text">
-            <div className="quiz-result-eyebrow mono">Your Rooh match</div>
-            <h3 className="quiz-result-name">{result.name}</h3>
-            <div className="quiz-result-code mono">{result.code}{result.depth ? ` · ${result.depth}` : ""}</div>
+      <div className="sq-intro" data-reveal>
+        <div className="sq-intro-badge mono">Shade Finder</div>
+        <h3 className="sq-intro-headline">Find your perfect<br /><em>Rooh shade.</em></h3>
+        <p className="sq-intro-sub">{questions.length} questions. A shade matched to your depth, undertone, and what your skin actually needs — no guessing.</p>
+        <button className="btn btn-primary sq-intro-cta" onClick={() => setPhase("quiz")}>Start the quiz →</button>
+      </div>
+    );
+  }
+
+  /* result */
+  if (phase === "result" && result) {
+    const copy = getPersonalizedCopy(answers);
+    return (
+      <div className="sq-result" data-reveal>
+        <div className="sq-result-eyebrow mono">Your Rooh match</div>
+        <div className="sq-result-card">
+          <div className="sq-result-swatch" style={{ background: result.color }}></div>
+          <div className="sq-result-details">
+            <h3 className="sq-result-name">{result.name}</h3>
+            <div className="sq-result-code mono">{result.code}{result.depth ? ` · ${result.depth}` : ""}</div>
+            {copy && <p className="sq-result-copy">{copy}</p>}
           </div>
         </div>
-        <div className="quiz-result-actions">
-          <button className="btn btn-primary" onClick={() => onMatch(result)}>
-            Select this shade →
-          </button>
-          <button className="btn btn-ghost quiz-retake" onClick={reset}>Retake quiz</button>
+        {adjacent.length > 0 && (
+          <div className="sq-adjacent">
+            <div className="sq-adjacent-label mono">Also consider — one shade away</div>
+            <div className="sq-adjacent-row">
+              {adjacent.map(s => (
+                <button key={s.code} className="sq-adj-chip" onClick={() => onMatch(s)}>
+                  <span className="sq-adj-swatch" style={{ background: s.color }}></span>
+                  <span className="sq-adj-info">
+                    <span className="sq-adj-name">{s.name}</span>
+                    <span className="sq-adj-code mono">{s.code}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="sq-result-actions">
+          <button className="btn btn-primary" onClick={() => onMatch(result)}>Select {result.name} →</button>
+          <button className="sq-retake mono" onClick={reset}>Retake quiz</button>
         </div>
       </div>
     );
   }
 
-  const q = questions[step];
-  const swatched = q.key === "depth" || q.key === "undertone";
-
+  /* question */
+  const q   = questions[step];
+  const pct = Math.round((step / questions.length) * 100);
   return (
-    <div className="quiz-wrap" data-reveal>
-      <div className="quiz-header">
-        <div className="quiz-progress mono">
-          {questions.map((_, i) => (
-            <span key={i} className={`quiz-dot ${i <= step ? "active" : ""}`}></span>
-          ))}
-        </div>
-        <p className="quiz-q">{q.question}</p>
-      </div>
-      <div className={`quiz-options ${swatched ? "quiz-options-swatched" : "quiz-options-text"}`}>
+    <div className="sq-step" data-reveal>
+      <div className="sq-bar-track"><div className="sq-bar-fill" style={{ width: `${pct}%` }}></div></div>
+      <div className="sq-step-meta mono">{step + 1} of {questions.length}</div>
+      <p className="sq-question">{q.question}</p>
+      <div className={`sq-opts ${q.swatched ? "sq-opts-swatched" : "sq-opts-text"}`}>
         {q.options.map(opt => (
-          <button key={opt.value} className="quiz-opt" onClick={() => handleAnswer(q.key, opt.value)}>
-            {opt.color && <span className="quiz-opt-swatch" style={{ background: opt.color }}></span>}
-            <span className="quiz-opt-label">{opt.label}</span>
-            {opt.hint && <span className="quiz-opt-hint">{opt.hint}</span>}
+          <button key={opt.value} className="sq-opt" onClick={() => handleAnswer(q.key, opt.value)}>
+            {q.swatched && opt.color
+              ? <span className="sq-opt-circle" style={{ background: opt.color }}></span>
+              : opt.icon && <span className="sq-opt-icon">{opt.icon}</span>
+            }
+            <span className="sq-opt-body">
+              <span className="sq-opt-label">{opt.label}</span>
+              {opt.hint && <span className="sq-opt-hint">{opt.hint}</span>}
+            </span>
           </button>
         ))}
       </div>
       {step > 0 && (
-        <button className="quiz-back mono" onClick={() => setStep(step - 1)}>← Back</button>
+        <button className="sq-back mono" onClick={() => setStep(step - 1))}>← Previous question</button>
       )}
     </div>
   );

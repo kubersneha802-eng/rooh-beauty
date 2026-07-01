@@ -211,37 +211,41 @@ function ProductPage({ productId, cart, setPage }) {
   );
 }
 
-/* ----- shade range selector (grouped) ----- */
+/* ----- shade range selector (flat, lightest → darkest) ----- */
+function hexLuminance(hex) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return 0.299 * r + 0.587 * g + 0.114 * b;
+}
+
 function ShadeRanges({ groups, correctors, sel, onSelect, noun }) {
-  const total = groups.reduce((n, g) => n + g.shades.length, 0) + (correctors ? correctors.length : 0);
+  const sorted = groups
+    .reduce((all, g) => all.concat(g.shades), [])
+    .sort((a, b) => hexLuminance(b.color) - hexLuminance(a.color));
+  const total = sorted.length + (correctors ? correctors.length : 0);
   return (
     <div className="shade-ranges">
       <div className="shade-ranges-head">
         <span className="mono">Choose your {noun}</span>
         <span className="mono dim">{total} total</span>
       </div>
-      {groups.map((g, gi) => (
-        <div key={gi} className="shade-group">
-          <div className="shade-group-label">
-            <span>{g.label}</span>
-            {g.note && <span className="shade-group-note">{g.note}</span>}
-          </div>
-          <div className="shade-grid">
-            {g.shades.map((s) => (
-              <button
-                key={s.code}
-                className={`shade-chip ${sel.code === s.code ? "active" : ""}`}
-                style={{ background: s.color }}
-                onClick={() => onSelect(s)}
-                title={`${s.name} · ${s.code}${s.depth ? " · " + s.depth : ""}`}
-                aria-label={`${s.name} ${s.code}`}
-              >
-                <span className="shade-chip-code">{s.code.replace(/^[A-Z]+-?/, "")}</span>
-              </button>
-            ))}
-          </div>
+      <div className="shade-group">
+        <div className="shade-grid">
+          {sorted.map((s) => (
+            <button
+              key={s.code}
+              className={`shade-chip ${sel.code === s.code ? "active" : ""}`}
+              style={{ background: s.color }}
+              onClick={() => onSelect(s)}
+              title={`${s.name} · ${s.code}${s.depth ? " · " + s.depth : ""}`}
+              aria-label={`${s.name} ${s.code}`}
+            >
+              <span className="shade-chip-code">{s.code.replace(/^[A-Z]+-?/, "")}</span>
+            </button>
+          ))}
         </div>
-      ))}
+      </div>
 
       {correctors && correctors.length > 0 && (
         <div className="shade-group correctors">
